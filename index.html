@@ -7,5 +7,21 @@
     <link rel="stylesheet" href="./styles.css" />
     <script src="./scripts.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <h1>Quantum Library Records</h1>
+    <button class="add-book-button">Add Book</button>
+    <dialog>
+      <form action="">
+        <label for="book-name">Book Name</label>
+        <input type="text" name="book-name" id="book-name" />
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" />
+        <label for="pages">Page Count</label>
+        <input type="number" name="pages" id="pages" />
+        <label for="has-read">Finished</label>
+        <input type="checkbox" name="has-read" id="has-read" />
+      </form>
+      <button class="modal-close">close</button>
+    </dialog>
+  </body>
 </html>
