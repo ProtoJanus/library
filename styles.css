@@ -1,5 +1,54 @@
+* {
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7f2e0;
+  color: rgb(83, 79, 79);
+}
+
 dialog {
   border: none;
+  background-color: #cdbab4;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 20vw;
+
+  form {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    #has-read {
+      align-self: flex-start;
+    }
+  }
+
+  button {
+    margin-top: auto;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    height: 30px;
+    background-color: #ac2f44;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  button:hover {
+    background-color: #c4364e;
+  }
 }
 
 ::backdrop {
