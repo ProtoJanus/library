@@ -12,7 +12,7 @@
     <button class="add-book-button">Add Book</button>
     <dialog>
       <div class="dialog-content">
-        <form action="">
+        <form id="book-form" action="">
           <label for="book-name">Book Name</label>
           <input type="text" name="book-name" id="book-name" />
           <label for="author">Author</label>
@@ -22,8 +22,23 @@
           <label for="has-read">Finished</label>
           <input type="checkbox" name="has-read" id="has-read" />
         </form>
-        <button class="modal-close">Submit Book</button>
+        <button form="book-form" type="submit" class="modal-close">
+          Submit Book
+        </button>
       </div>
     </dialog>
+    <table class="books-table">
+      <thead>
+        <tr>
+          <td>Book Name</td>
+          <td>Author</td>
+          <td>Pages</td>
+          <td>Finished</td>
+        </tr>
+        <tbody class="books-table-body">
+
+        </tbody>
+      </thead>
+    </table>
   </body>
 </html>

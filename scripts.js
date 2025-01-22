@@ -14,9 +14,18 @@ Book.prototype.info = function () {
 function addBookToLibrary(title, author, pages, hasRead) {
   const book = new Book(title, author, pages, hasRead);
   myLibrary.push(book);
+  generateLibraryTable(book);
 }
 
-function generateLibraryTable(book) {}
+function generateLibraryTable(book) {
+  const booksTableBody = document.querySelector(".books-table-body");
+  booksTableBody.innerHTML += `<tr>
+          <td>${book.title}</td>
+          <td>${book.author}</td>
+          <td>${book.pages}</td>
+          <td>${book.hasRead}</td>
+        </tr>`;
+}
 
 const myLibrary = [];
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 300, true);
@@ -29,6 +38,16 @@ addBookButton.addEventListener("click", () => {
   dialog.showModal();
 });
 
-modalClose.addEventListener("click", () => {
+const form = document.getElementById("book-form");
+modalClose.addEventListener("click", (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  addBookToLibrary(
+    data.get("book-name"),
+    data.get("author"),
+    Number(data.get("pages")),
+    data.get("has-read") === "on" ? true : false
+  );
+
   dialog.close();
 });

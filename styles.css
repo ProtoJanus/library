@@ -28,6 +28,7 @@ dialog {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    color: rgb(68, 61, 61);
 
     #has-read {
       align-self: flex-start;
