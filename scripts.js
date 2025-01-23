@@ -9,7 +9,7 @@ function Book(title, author, pages, hasRead, id) {
 Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${
     this.hasRead ? "has read" : "has not read yet."
-  }`;
+  } ID:${this.id}`;
 };
 
 Book.prototype.toggleHasRead = function () {
@@ -33,7 +33,31 @@ function generateLibraryTable(book) {
           <td class="has-read-cell">${
             book.hasRead ? "True" : "False"
           } <button class="has-read-toggle-button">Toggle</button></td>
+          <td class="delete-button-cell"><button class="delete-button">Delete</button></td>
         </tr>`;
+
+  // when we add a new row, these event listeners are added at the same time so they are applied
+  // to each new book that's added
+
+  booksTableBody.addEventListener("click", (e) => {
+    // toggle button (on click toggle if you have read the book, and update the book in the myLibrary array)
+    if (e.target.classList.contains("has-read-toggle-button")) {
+      const row = e.target.closest("tr");
+      const specificBook = myLibrary.find((item) => item.id == row.id);
+      specificBook.toggleHasRead();
+    }
+
+    // delete button (on click delete row and remove book from myLibrary array)
+    if (e.target.classList.contains("delete-button")) {
+      const row = e.target.closest("tr");
+      const bookId = parseInt(row.id, 10);
+      const bookIndex = myLibrary.findIndex((item) => item.id === bookId);
+      if (bookIndex !== -1) {
+        myLibrary.splice(bookIndex, 1);
+        row.remove();
+      }
+    }
+  });
 }
 
 function updateHasRead(rowId) {
@@ -52,13 +76,14 @@ addBookToLibrary("Fool Moon", "Jim Butcher", 432, false);
 
 const addBookButton = document.querySelector(".add-book-button");
 const dialog = document.querySelector("dialog");
-const modalClose = document.querySelector(".modal-close");
 
 addBookButton.addEventListener("click", () => {
   dialog.showModal();
 });
 
+const modalClose = document.querySelector(".modal-close");
 const form = document.getElementById("book-form");
+
 modalClose.addEventListener("click", (e) => {
   e.preventDefault();
   const data = new FormData(form);
@@ -70,16 +95,4 @@ modalClose.addEventListener("click", (e) => {
   );
 
   dialog.close();
-});
-
-const hasReadToggleButtons = document.querySelectorAll(
-  ".has-read-toggle-button"
-);
-hasReadToggleButtons.forEach((hasReadToggleButton) => {
-  hasReadToggleButton.addEventListener("click", (e) => {
-    const row = e.target.closest("tr");
-    const specificBook = myLibrary.find((item) => item.id == row.id);
-
-    specificBook.toggleHasRead();
-  });
 });
